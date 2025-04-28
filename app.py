@@ -1,7 +1,9 @@
 import streamlit as st
 
+st.set_page_config(page_title="Utleiekalkulator", page_icon="🏡")
+
 # App tittel
-st.title("Utleie Lønnsomhetskalkulator")
+st.title("🏡 Utleie Lønnsomhetskalkulator")
 
 st.header("Legg inn informasjon om eiendommen")
 
