@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.graph_objects as go
+import datetime
 
 st.set_page_config(page_title="Utleiekalkulator", page_icon="🏡")
 
@@ -144,7 +145,7 @@ if st.button("Beregn lønnsomhet og vis simulering"):
         annual_loan_payment = current_loan_payment * 12
         annual_cash_flow = annual_rent - (annual_expenses + annual_loan_payment)
 
-        years.append(year)
+        years.append(year + datetime.datetime.now().year)      
         rents.append(annual_rent)
         expenses.append(annual_expenses + annual_loan_payment)
         cash_flows.append(annual_cash_flow)
