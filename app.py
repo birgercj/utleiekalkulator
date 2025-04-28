@@ -81,12 +81,6 @@ if st.button("Beregn lønnsomhet"):
     with col3:
         st.metric("Lånebeløp", f"{loan_amount:,.0f} kr")
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Lånebeløp pr måned m/avdrag", f"{loan_payment:,.0f} kr")
-    with col2:
-        st.metric("Årlig lånekostnad", f"{annual_loan_payment:,.0f} kr")
-
     st.subheader("Inntekter")
     col1, col2 = st.columns(2)
     with col1:
@@ -108,6 +102,14 @@ if st.button("Beregn lønnsomhet"):
     with col2:
         st.metric("Årlig netto leieinntekt", f"{annual_net_rent:,.0f} kr")
 
+    st.subheader("Finansieringskostnader")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Lånebeløp pr måned m/avdrag", f"{loan_payment:,.0f} kr")
+    with col2:
+        st.metric("Årlig lånekostnad", f"{annual_loan_payment:,.0f} kr")
+
+    st.subheader("Kontantstrøm")
     col1, col2 = st.columns(2)
     with col1:
         st.metric("Månedlig kontantstrøm", f"{monthly_cash_flow:,.0f} kr")
@@ -122,3 +124,4 @@ if st.button("Beregn lønnsomhet"):
         st.metric("Netto Yield", f"{netto_yield:.2f} %")
     with col3:
         st.metric("Cash-on-Cash Return", f"{cash_on_cash:.2f} %")
+        
