@@ -33,7 +33,7 @@ others = st.number_input("Andre kostnader (kr)", min_value=0, value=0, step=100)
 
 
 st.subheader("Risiko og simulering")
-months = st.number_input("Antall måneder med leieinntekter", min_value=0, value=10, step=0.5, max_value=12, help="For AS er det vanlig å bruke 10 måneder for å ta høyde for ledighet, 11,5 måneder for privat")
+months = st.number_input("Antall måneder med leieinntekter", min_value=0.0, value=10.0, step=0.5, max_value=12.0, help="For AS er det vanlig å bruke 10 måneder for å ta høyde for ledighet, 11,5 måneder for privat")
 
 # Simulering parametre
 st.subheader("Parametre for 10 års simulering")
