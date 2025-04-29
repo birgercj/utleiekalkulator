@@ -13,23 +13,27 @@ st.header("Legg inn informasjon om eiendommen")
 case_name = st.text_input("Navn på case", placeholder="F.eks. 'Leilighet St. Hanshaugen'")
 
 purchase_price = st.number_input("Kjøpesum (kr) inkl dok", min_value=0, step=100000, value=4000000)
-equity_percentage = st.number_input("Egenkapital (%)", min_value=0.0, max_value=100.0, value=20.0, step=5.0)
+equity_percentage = st.number_input("Egenkapital (%)", min_value=0.0, max_value=100.0, value=20.0, step=5.0, help="20% er vanlig for lån til AS")
 equity = purchase_price * (equity_percentage / 100)
 
-interest_rate = st.number_input("Rente på lån (%)", min_value=0.0, value=5.0, step=0.1)
-loan_years = st.number_input("Lånetid (år)", min_value=1, value=25, step=1)
+interest_rate = st.number_input("Rente på lån (%)", min_value=0.0, value=5.0, step=0.1, help="Rente på lån til AS er ofte 1-2% høyere enn privatlån")
+loan_years = st.number_input("Lånetid (år)", min_value=1, value=25, step=1,help="Lånetid for AS er ofte maks 20år")
 monthly_rent = st.number_input("Månedlige leieinntekter (kr)", min_value=0)
 
 st.subheader("Kostnader per måned")
-maintenance = st.number_input("Vedlikehold (kr)", min_value=0, value=0, step=100)
+maintenance = st.number_input("Vedlikehold (kr)", min_value=0, value=0, step=100, help="Banken liker å se at man har med vedlikehold i kalkylen")
 electricity = st.number_input("Strøm (kr)", min_value=0, value=0, step=100)
 municipal_fees = st.number_input("Kommunale avgifter (kr)", min_value=0, value=0, step=100)
 property_tax = st.number_input("Eiendomsskatt (kr)", min_value=0, value=0, step=100)
 internet = st.number_input("Internett (kr)", min_value=0, value=0, step=100)
 insurance = st.number_input("Forsikring (kr)", min_value=0, value=0, step=100)
+joint_expenses = st.number_input("Fellesutgifter (kr)", min_value=0, value=0, step=100)
+others = st.number_input("Andre kostnader (kr)", min_value=0, value=0, step=100)
+
+
 
 st.subheader("Risiko og simulering")
-months = st.number_input("Antall måneder med leieinntekter", min_value=0, value=10, step=1, max_value=12)
+months = st.number_input("Antall måneder med leieinntekter", min_value=0, value=10, step=0.5, max_value=12, help="For AS er det vanlig å bruke 10 måneder for å ta høyde for ledighet, 11,5 måneder for privat")
 
 # Simulering parametre
 st.subheader("Parametre for 10 års simulering")
@@ -50,7 +54,7 @@ if st.button("Beregn lønnsomhet og vis simulering"):
     else:
         loan_payment = 0
 
-    total_monthly_expenses = maintenance + electricity + municipal_fees + property_tax + internet + insurance
+    total_monthly_expenses = maintenance + electricity + municipal_fees + property_tax + internet + insurance + joint_expenses + others
 
     # Beregninger for nåværende år
     monthly_net_rent = monthly_rent - total_monthly_expenses
@@ -104,7 +108,7 @@ if st.button("Beregn lønnsomhet og vis simulering"):
     st.subheader("Finansieringskostnader")
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Lånebeløp pr måned m/avdrag", f"{loan_payment:,.0f} kr")
+        st.metric("Lånebeløp pr måned m/avdrag", f"{loan_payment:,.0f} kr", help="Sjekk med bankens lånekalkulator for eksakt beløp")
     with col2:
         st.metric("Årlig lånekostnad", f"{annual_loan_payment:,.0f} kr")
     st.subheader("Kontantstrøm")
